@@ -3,7 +3,9 @@ function fill(summary){
     let color = "#ffff00";
     let colorf = "#000000";
     for(var i=0; i<summary.length; ++i){
-	// alert(msg.summary[i]);
+	var txt = $("body").text();
+	//alert(summary[i]);
+	//alert(txt.indexOf(summary[i]));
 	$("body").highlight(summary[i]);
     }
     $(".highlight-ext").css("background-color", color);
@@ -20,5 +22,5 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     if (msg.command == 'fill') {
 	fill(msg.summary);
     }
-    sendResponse();
+    //sendResponse();
 });
