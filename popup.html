@@ -4,6 +4,20 @@
   <!-- <p><label>Highlight Color: <input id="#highlight-color" type="color" name="color" value="#ffff00" /> </label></p> -->
   <p><label>Number of summary sentence: <input type="number" name="summary_number" value="5" step="1"></label></p>
   <p><label>Minimum length of sentence: <input type="number" name="minimum_length" value="1" step="1"> </label></p>
+  
+  <p><label>Separator:
+      <select name="separator">
+	<option value=". 。 ．" selected>Period</option>
+	<option value="n . 。 ．">Period and Linebreak</option>
+      </select>
+  </label></p>
+  
+  <p><label>Language:
+      <select name="lang">
+	<option value="en" selected>English</option>
+	<option value="ja">Japanese</option>
+      </select>
+  </label></p>
   <!-- 
   <p><label>Alert summary : <input type="checkbox" name="usealert"></label></p>
   <p><label>Use line break as separator: <input type="checkbox" name="linebreak"></label></p>
