@@ -89,3 +89,28 @@ function binary_search(sens_list, word_weight, summary_number, search_ratio){
     });
     return summary;
 }
+
+function set_importance(sens_list, word_weight, word_list_minimum){
+// give importance
+    for(var i=0; i<sens_list.length; ++i){
+	for (var j=0; j< sens_list[i]["word_list"].length; ++j){
+	    var ww = word_weight[sens_list[i]["word_list"][j]];
+	    sens_list[i]["importance"] += ww;
+	}
+	// is it right?
+	if(sens_list[i]["word_list"].length > 0){
+	    sens_list[i]["importance"] = sens_list[i]["importance"] / sens_list[i]["word_list"].length;
+	}
+	if (sens_list[i]["word_list"].length < word_list_minimum){
+	    sens_list[i]["importance"] = 0;
+	}
+    }
+    // sort
+    
+    sens_list.sort(function(a,b){
+	if(a.importance>b.importance) return -1;
+	if(a.importance<b.importance) return 1;
+	return 0;
+    });
+    
+}
