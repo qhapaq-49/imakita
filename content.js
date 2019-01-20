@@ -14,14 +14,21 @@ function fill(summary){
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     //alert("fill");
-    if (msg.command == 'useall'){
-	// looks not so good
-	summary = preproc_en($("body").text());
-	alert(summary);
+    if (msg.command == 'summarize'){
+	//alert("fall");
+	var summary = [];
+	// summarize and push
+	if (msg.lang == "ja"){
+	    summary = preproc_ja(window.getSelection().toString(), msg.summary_number, msg.minimum_length, msg.separator);
+	}else{
+	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, msg.separator);
+	}
+	summary_alert = "";
+	for(var i=0; i<summary.length; ++i){
+	    summary_alert += "-> " + summary[i] +".\n\n";
+	}
+	alert(summary_alert);	
 	fill(summary);
-    }
-    if (msg.command == 'fill') {
-	fill(msg.summary);
     }
     //sendResponse();
 });

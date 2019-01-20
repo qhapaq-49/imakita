@@ -16,41 +16,28 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	var minimum_length = 5;
 	var separator = [".","。"];
 	var lang = "en";
+	var summary = [];
 	summary_number = obj.summary_number;
 	minimum_length = obj.minimum_length;
 	// group of separator is given by text split by " ".
 	// it is very bad hack...
 	separator = obj.separator.split(" ");
-	alert(separator);
-	lang = obj.lang;
-	// not so good solution ....
-	if(info.selectionText.length < 20){
-	    if(tab.id>=0){
-		chrome.tabs.sendMessage(tab.id, {"command":"useall"});
-	    }else{
-		alert("failed to auto selection of text");
-	    }
-	    return;
-	}
-
-	//getinfo();
 	
-	// summarize and push
-	if (lang == "ja"){
-	    summary = preproc_ja(info.selectionText, summary_number, minimum_length, separator);
+	lang = obj.lang;
+	if(tab.id < 0){
+	    // summarize and push
+	    if (lang == "ja"){
+		summary = preproc_ja(info.selectionText, summary_number, minimum_length, separator);
+	    }else{
+		summary = preproc_en(info.selectionText, summary_number, minimum_length, separator);
+	    }
+	    summary_alert = "";
+	    for(var i=0; i<summary.length; ++i){
+		summary_alert += "-> " + summary[i] +".\n\n";
+	    }
+	    alert(summary_alert);
 	}else{
-	    summary = preproc_en(info.selectionText, summary_number, minimum_length, separator);
-	}
-	summary_alert = "";
-	for(var i=0; i<summary.length; ++i){
-	    summary_alert += "-> " + summary[i] +".\n\n";
-	}
-
-	alert(summary_alert);
-	if(tab.id>=0){
-	    chrome.tabs.sendMessage(tab.id, {"command":"fill", "summary":summary});
-	}else{
-	    // alert("failed to fill the document");
+	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator});
 	}
     });
 });

@@ -12,9 +12,9 @@ function preproc_en(text, summary_number, word_list_minimum, separator){
     // separator (bad hack...)
     for(var i=0; i<separator.length; ++i){
 	if(separator[i]=="n"){
-	    text =text.replace(/\r?\n/g, "。");
+	    text =text.replace(/\r?\n/g, ".");
 	}else{
-	    text =text.replace(separator[i], "。");
+	    text =text.replace(separator[i], ".");
 	}
     }
 
