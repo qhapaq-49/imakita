@@ -13,6 +13,7 @@ function fill(summary){
 }
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
+    //alert("fill");
     if (msg.command == 'useall'){
 	// looks not so good
 	summary = preproc_en($("body").text());
