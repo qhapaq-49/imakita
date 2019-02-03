@@ -20,8 +20,14 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	// summarize and push
 	if (msg.lang == "ja"){
 	    summary = preproc_ja(window.getSelection().toString(), msg.summary_number, msg.minimum_length, msg.separator);
+	}else if(msg.lang == "de"){
+	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, not_word_array_de, msg.separator);
+	}else if(msg.lang == "es"){
+	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, not_word_array_es, msg.separator);
+	}else if(msg.lang == "fr"){
+	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, not_word_array_fr, msg.separator);
 	}else{
-	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, msg.separator);
+	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, not_word_array_en, msg.separator);
 	}
 	summary_alert = "Language : " + msg.lang +"\n";
 	for(var i=0; i<summary.length; ++i){

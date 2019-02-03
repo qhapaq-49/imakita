@@ -33,8 +33,14 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	    // summarize and push
 	    if (lang == "ja"){
 		summary = preproc_ja(info.selectionText, summary_number, minimum_length, separator);
+	    }else if(lang == "de"){
+		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_de, separator);
+	    }else if(lang == "es"){
+		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_es, separator);
+	    }else if(lang == "fr"){
+		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_fr, separator);
 	    }else{
-		summary = preproc_en(info.selectionText, summary_number, minimum_length, separator);
+		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_en, separator);
 	    }
 	    summary_alert = "Language : " + lang +"\n";
 	    for(var i=0; i<summary.length; ++i){
