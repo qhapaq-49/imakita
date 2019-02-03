@@ -8,14 +8,14 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-
+chrome.storage.local.set({"lang":"auto", "summary_number":5, "minimum_length":2, "separator":". 。 ．"}, null);
 
 chrome.contextMenus.onClicked.addListener(function(info, tab){
     chrome.storage.local.get(function(obj) {
 	var summary_number = 3;
 	var minimum_length = 5;
 	var separator = [".","。"];
-	var lang = "en";
+	var lang = "auto";
 	var summary = [];
 	summary_number = obj.summary_number;
 	minimum_length = obj.minimum_length;

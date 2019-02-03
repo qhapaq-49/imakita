@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	}else{
 	    summary = preproc_en(window.getSelection().toString(), msg.summary_number, msg.minimum_length, msg.separator);
 	}
-	summary_alert = "";
+	summary_alert = "Language : " + msg.lang +"\n";
 	for(var i=0; i<summary.length; ++i){
 	    summary_alert += "-> " + summary[i] +".\n\n";
 	}
