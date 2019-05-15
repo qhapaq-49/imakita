@@ -33,7 +33,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	for(var i=0; i<summary.length; ++i){
 	    summary_alert += "-> " + summary[i] +".\n\n";
 	}
-	alert(summary_alert);	
+	if (!msg.no_alert){
+	    alert(summary_alert);
+	}
 	fill(summary);
     }
     //sendResponse();

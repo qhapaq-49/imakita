@@ -6,9 +6,10 @@ chrome.runtime.onInstalled.addListener(function () {
 	"type": "normal",
 	"contexts": ["selection"],
     });
+    chrome.storage.local.set({"lang":"auto", "summary_number":5, "minimum_length":2, "separator":". 。 ．", "no_alert":false, "copy_clipboard":true}, null);
 });
 
-chrome.storage.local.set({"lang":"auto", "summary_number":5, "minimum_length":2, "separator":". 。 ．"}, null);
+
 
 chrome.contextMenus.onClicked.addListener(function(info, tab){
     chrome.storage.local.get(function(obj) {
@@ -17,8 +18,13 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	var separator = [".","。"];
 	var lang = "auto";
 	var summary = [];
+	var no_alert=false;
+	var copy_clipboard=true;
 	summary_number = obj.summary_number;
 	minimum_length = obj.minimum_length;
+	no_alert = obj.no_alert;
+	copy_clipboard = obj.copy_clipboard;
+	
 	// group of separator is given by text split by " ".
 	// it is very bad hack...
 	separator = obj.separator.split(" ");
@@ -46,9 +52,11 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	    for(var i=0; i<summary.length; ++i){
 		summary_alert += "-> " + summary[i] +".\n\n";
 	    }
-	    alert(summary_alert);
+	    if (!no_alert){
+		alert(summary_alert);
+	    }
 	}else{
-	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator});
+	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator,"no_alert":no_alert, "copy_clipboard":copy_clipboard});
 	}
     });
 });

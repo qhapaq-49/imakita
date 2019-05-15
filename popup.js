@@ -12,6 +12,12 @@ $(function () {
 	if ("separator" in obj) {
 	    $("select[name='separator']").val(obj.separator);
 	}
+	if ("no_alert" in obj) {
+	    $("input[name='no_alert']").val(obj.no_alert);
+	}
+	if ("copy_clipboard" in obj) {
+	    $("input[name='copy_clipboard']").val(obj.copy_clipboard);
+	}
 
 	$("#register").on("click", function() {
 	    update_settings();
