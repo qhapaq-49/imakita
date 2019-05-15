@@ -1,4 +1,17 @@
 
+function saveToClipboard(str) {
+    var textArea = document.createElement("textarea");
+    textArea.style.cssText = "position:absolute;left:-100%";
+    document.body.appendChild(textArea);
+    textArea.value = str;
+    textArea.select();
+    document.execCommand("copy");
+    //alert("copied" +textArea.value);    
+    document.body.removeChild(textArea);
+
+}
+
+
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({
 	"id": "IMAKITA",
@@ -24,7 +37,6 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	minimum_length = obj.minimum_length;
 	no_alert = obj.no_alert;
 	copy_clipboard = obj.copy_clipboard;
-	
 	// group of separator is given by text split by " ".
 	// it is very bad hack...
 	separator = obj.separator.split(" ");
@@ -39,6 +51,8 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	    // summarize and push
 	    if (lang == "ja"){
 		summary = preproc_ja(info.selectionText, summary_number, minimum_length, separator);
+	    }else if(lang == "zh"){
+		summary = preproc_zh(info.selectionText, summary_number, minimum_length, separator);
 	    }else if(lang == "de"){
 		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_de, separator);
 	    }else if(lang == "es"){
@@ -49,14 +63,20 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 		summary = preproc_en(info.selectionText, summary_number, minimum_length, not_word_array_en, separator);
 	    }
 	    summary_alert = "Language : " + lang +"\n";
+	    var clip = tab.title + "\n";
 	    for(var i=0; i<summary.length; ++i){
 		summary_alert += "-> " + summary[i] +".\n\n";
+		clip += summary[i]+"\n";
 	    }
-	    if (!no_alert){
+	    if(!no_alert){
 		alert(summary_alert);
 	    }
+	    if(copy_clipboard){
+		saveToClipboard(clip);
+	    }
 	}else{
-	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator,"no_alert":no_alert, "copy_clipboard":copy_clipboard});
+	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator,"title":tab.title + " " + tab.url,"no_alert":no_alert, "copy_clipboard":copy_clipboard});
 	}
     });
 });
+

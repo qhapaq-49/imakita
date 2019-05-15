@@ -2,8 +2,8 @@
 <div style="width: 400px; font-size: 16px;">
   <h1>Imakita Summarizer</h1>
   <!-- <p><label>Highlight Color: <input id="#highlight-color" type="color" name="color" value="#ffff00" /> </label></p> -->
-  <p><label>Number of summary sentence: <input type="number" name="summary_number" value="5" step="1"></label></p>
-  <p><label>Minimum length of sentence: <input type="number" name="minimum_length" value="2" step="1"> </label></p>
+  <p><label>Number of summary sentence: <input type="number" name="summary_number" value="3" step="1", min="1"></label></p>
+  <p><label>Minimum length of sentence: <input type="number" name="minimum_length" value="2" step="1", min="1"> </label></p>
   
   <p><label>Separator:
       <select name="separator">
@@ -17,21 +17,18 @@
 	<option value="auto" selected>Auto</option>
 	<option value="en">English</option>
 	<option value="ja">Japanese</option>
+	<!--
+	<option value="zh">Chinese</option>
+	-->
 	<option value="de">German</option>
 	<option value="es">Spanish</option>
 	<option value="fr">French</option>
       </select>
   </label></p>
-  <p>
-    <input type="checkbox" name="version" value="no_alert"> No alert
-  </p>
-  <p>
-    <input type="checkbox" name="version" value="copy_clipboard" checked> Copy summary to clipboard
-  </p>
-  <!-- 
-  <p><label>Alert summary : <input type="checkbox" name="usealert"></label></p>
-  <p><label>Use line break as separator: <input type="checkbox" name="linebreak"></label></p>
-  -->
+  
+  <p><label>No alert : <input type="checkbox" name="no_alert"></label></p>
+  <p><label>Copy summary to clipboard : <input type="checkbox" name="copy_clipboard"></label></p>
+ 
   <p><button id="register">Register</button></p>
   <hr>
   <div style="padding: 20px 0;">
