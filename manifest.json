@@ -1,8 +1,9 @@
 {
-    "name": "IMAKITA_Summarization",
+    "name": "IMAKITA AI text summarizer",
     "version": "0.0.1",
+    "default_locale" : "en",
     "manifest_version": 2,
-    "description": "IMAKITA automated text summarization",
+    "description": "IMAKITA summarizes long and boring text effectively",
     "permissions": [
 	"contextMenus",
 	"contextMenus",
