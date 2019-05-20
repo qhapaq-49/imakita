@@ -6,7 +6,6 @@
     "description": "IMAKITA summarizes long and boring text effectively",
     "permissions": [
 	"contextMenus",
-	"contextMenus",
 	"clipboardRead",
 	"clipboardWrite",
 	"storage",
