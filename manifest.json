@@ -1,12 +1,11 @@
 {
     "name": "IMAKITA AI text summarizer",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "default_locale" : "en",
     "manifest_version": 2,
     "description": "IMAKITA summarizes long and boring text effectively",
     "permissions": [
 	"contextMenus",
-	"clipboardRead",
 	"clipboardWrite",
 	"storage",
 	"tabs",
