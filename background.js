@@ -1,3 +1,10 @@
+importScripts("lang_detect.js");
+importScripts("stop_words.js");
+importScripts("imakita_body.js");
+importScripts("preproc_en.js");
+importScripts("tiny_segmenter-0.2.js");
+importScripts("preproc_ja.js");
+
 
 function saveToClipboard(str) {
     var textArea = document.createElement("textarea");
@@ -20,6 +27,7 @@ chrome.runtime.onInstalled.addListener(function () {
 	"contexts": ["selection"],
     });
     chrome.storage.local.set({"lang":"auto", "summary_number":5, "minimum_length":2, "separator":". 。 ．", "no_alert":false, "copy_clipboard":true}, null);
+    return true;
 });
 
 
@@ -78,5 +86,6 @@ chrome.contextMenus.onClicked.addListener(function(info, tab){
 	    chrome.tabs.sendMessage(tab.id, {"command":"summarize", "lang":lang, "summary_number":summary_number, "minimum_length":minimum_length, "separator":separator,"title":tab.title + " " + tab.url,"no_alert":no_alert, "copy_clipboard":copy_clipboard});
 	}
     });
+    return true;
 });
 
