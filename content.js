@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	    clip += summary[i] +".\n";
 	}
 	if (msg.copy_clipboard){
-	    saveToClipboard(clip);
+		navigator.clipboard.writeText(clip);
 	}
 	if (!msg.no_alert){
 	    alert(summary_alert);
@@ -49,15 +49,3 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     }
     sendResponse({});
 });
-
-
-function saveToClipboard(str) {
-    var textArea = document.createElement("textarea");
-    textArea.style.cssText = "position:absolute;left:-100%";
-    document.body.appendChild(textArea);
-    textArea.value = str;
-    textArea.select();
-    document.execCommand("copy");
-    //alert("copied" +textArea.value);    
-    document.body.removeChild(textArea);
-}
